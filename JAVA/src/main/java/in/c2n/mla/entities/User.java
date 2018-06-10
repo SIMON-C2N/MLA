@@ -11,10 +11,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @Table(name = "USER")
+@ApiModel
 public class User implements java.io.Serializable {
 
 	@ApiModelProperty(required = false)
@@ -31,6 +33,7 @@ public class User implements java.io.Serializable {
 	private String password;
 	@ApiModelProperty(notes = "Posting time", required = false)
 	private Date postTime;
+	private String fcmKey;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -96,6 +99,15 @@ public class User implements java.io.Serializable {
 
 	public void setPostTime(Date postTime) {
 		this.postTime = postTime;
+	}
+
+	@Column(name = "FCM_KEY", nullable = true)
+	public String getFcmKey() {
+		return fcmKey;
+	}
+
+	public void setFcmKey(String fcmKey) {
+		this.fcmKey = fcmKey;
 	}
 
 }

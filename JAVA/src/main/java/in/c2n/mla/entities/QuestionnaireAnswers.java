@@ -8,13 +8,23 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "POST_LIKES")
-public class PostLikes implements java.io.Serializable {
+@Table(name = "QUESTIONNAIRE_ANSWERS")
+public class QuestionnaireAnswers implements java.io.Serializable {
 
 	private Integer id;
 	private int postId;
+	private String option;
 	private int userId;
-	private byte flag;
+
+	public QuestionnaireAnswers() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public QuestionnaireAnswers(int postId, String option, int userId) {
+		this.postId = postId;
+		this.option = option;
+		this.userId = userId;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,6 +46,15 @@ public class PostLikes implements java.io.Serializable {
 		this.postId = postId;
 	}
 
+	@Column(name = "`OPTION`", nullable = false)
+	public String getOption() {
+		return this.option;
+	}
+
+	public void setOption(String option) {
+		this.option = option;
+	}
+
 	@Column(name = "USER_ID", nullable = false)
 	public int getUserId() {
 		return this.userId;
@@ -43,15 +62,6 @@ public class PostLikes implements java.io.Serializable {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
-	}
-
-	@Column(name = "FLAG", nullable = false)
-	public byte getFlag() {
-		return this.flag;
-	}
-
-	public void setFlag(byte flag) {
-		this.flag = flag;
 	}
 
 }

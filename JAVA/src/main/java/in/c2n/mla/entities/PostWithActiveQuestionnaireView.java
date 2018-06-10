@@ -4,36 +4,33 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "POST")
-public class Post implements java.io.Serializable {
+@Table(name = "POST_WITH_ACTIVE_QUESTIONNAIRE_VIEW")
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class PostWithActiveQuestionnaireView implements java.io.Serializable {
 
-	private Integer id;
+	private int id;
 	private String description;
 	private String imageUrls;
 	private String videoUrls;
 	private String question;
 	private String QOptions;
-	private byte QFlag;
-	private Date postTime;
 	private char postType;
 	private String QAnswers;
+	private Date postTime;
+	private long totalLikesCount;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "ID", unique = true, nullable = false)
-	public Integer getId() {
+	@Column(name = "ID", nullable = false)
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -82,25 +79,6 @@ public class Post implements java.io.Serializable {
 		this.QOptions = QOptions;
 	}
 
-	@Column(name = "Q_FLAG", nullable = false)
-	public byte getQFlag() {
-		return this.QFlag;
-	}
-
-	public void setQFlag(byte QFlag) {
-		this.QFlag = QFlag;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "POST_TIME", nullable = false, length = 19)
-	public Date getPostTime() {
-		return this.postTime;
-	}
-
-	public void setPostTime(Date postTime) {
-		this.postTime = postTime;
-	}
-
 	@Column(name = "POST_TYPE", nullable = false, length = 1)
 	public char getPostType() {
 		return this.postType;
@@ -117,6 +95,25 @@ public class Post implements java.io.Serializable {
 
 	public void setQAnswers(String QAnswers) {
 		this.QAnswers = QAnswers;
+	}
+
+	@Id
+	@Column(name = "POST_TIME", nullable = false, length = 19)
+	public Date getPostTime() {
+		return this.postTime;
+	}
+
+	public void setPostTime(Date postTime) {
+		this.postTime = postTime;
+	}
+
+	@Column(name = "TOTAL_LIKES_COUNT", nullable = false)
+	public long getTotalLikesCount() {
+		return this.totalLikesCount;
+	}
+
+	public void setTotalLikesCount(long totalLikesCount) {
+		this.totalLikesCount = totalLikesCount;
 	}
 
 }
